@@ -1,0 +1,67 @@
+{
+  "name": "vuex-shared-mutations",
+  "version": "0.0.1",
+  "description": "Share vuex mutations across tabs via localStorage",
+  "main": "dist/vuex-shared-mutations.js",
+  "scripts": {
+    "test": "npm run build && ava",
+    "coverage": "npm run build && nyc ava && nyc report --reporter html",
+    "lint": "eslint src test",
+    "build": "babel src/index.js -o dist/vuex-shared-mutations.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xanf/vuex-shared-mutations.git"
+  },
+  "keywords": [
+    "vue",
+    "vuex",
+    "plugin"
+  ],
+  "author": "Illya Klymov <xanf@xanf.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xanf/vuex-shared-mutations/issues"
+  },
+  "homepage": "https://github.com/xanf/vuex-shared-mutations#readme",
+  "babel": {
+    "presets": [
+      "latest"
+    ],
+    "plugins": [
+      "add-module-exports"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "rules": {
+      "no-console": 0,
+      "arrow-parens": 0,
+      "array-bracket-spacing": [
+        2,
+        "always"
+      ]
+    },
+    "env": {
+      "browser": true
+    }
+  },
+  "devDependencies": {
+    "ava": "^0.17.0",
+    "babel-cli": "^6.22.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-latest": "^6.22.0",
+    "browser-env": "^2.0.19",
+    "eslint": "^3.14.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "nyc": "^10.1.2",
+    "sinon": "^1.17.7",
+    "vue": "^2.1.10",
+    "vuex": "^2.1.1"
+  },
+  "peerDependencies": {
+    "vue": "^2.0.0",
+    "vuex": "^2.0.0"
+  }
+}
