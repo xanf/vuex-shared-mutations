@@ -1,7 +1,7 @@
 const DEFAULT_SHARING_KEY = 'vuex-mutations-sharer';
 
 export default ({ predicate, sharingKey }) => store => {
-  if (!window || !window.localStorage) {
+  if (!window.localStorage) {
     console.error('[vuex-action-sharer] localStorage is not available. Disabling plugin');
     return;
   }
