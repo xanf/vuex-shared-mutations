@@ -18,6 +18,12 @@
     "vuex",
     "plugin"
   ],
+  "files": [
+    "dist/vuex-shared-mutations.js",
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
   "author": "Illya Klymov <xanf@xanf.me>",
   "license": "MIT",
   "bugs": {
