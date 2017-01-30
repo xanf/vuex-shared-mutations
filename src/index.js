@@ -18,7 +18,7 @@ export default ({ predicate, sharingKey }) => store => {
 
   const shouldShare = typeof predicate === 'function'
     ? predicate
-    : mutation => predicate.includes(mutation.type);
+    : mutation => predicate.indexOf(mutation.type) !== -1;
 
   store.subscribe(mutation => {
     if (committing) return;
