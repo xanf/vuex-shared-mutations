@@ -2,13 +2,13 @@ const DEFAULT_SHARING_KEY = 'vuex-mutations-sharer';
 
 export default ({ predicate, sharingKey }) => store => {
   if (!window || !window.localStorage) {
-    console.error('[vuex-action-sharer] localStorage is not available. Disabling plugin');
+    console.error('[vuex-shared-mutations] localStorage is not available. Disabling plugin');
     return;
   }
 
   if (typeof predicate !== 'function' && !Array.isArray(predicate)) {
     console.error(
-      '[vuex-action-sharer] Predicate should be either array of mutation names or function. Disabling plugin',
+      '[vuex-shared-mutations] Predicate should be either array of mutation names or function. Disabling plugin',
     );
     return;
   }
@@ -26,7 +26,7 @@ export default ({ predicate, sharingKey }) => store => {
       try {
         window.localStorage.setItem(key, JSON.stringify(mutation));
       } catch (e) {
-        console.error('[vuex-action-sharer] Unable to use setItem on localStorage');
+        console.error('[vuex-shared-mutations] Unable to use setItem on localStorage');
         console.error(e);
       }
     }
@@ -39,7 +39,7 @@ export default ({ predicate, sharingKey }) => store => {
         committing = true;
         store.commit(mutation.type, mutation.payload);
       } catch (error) {
-        console.error('[vuex-action-sharer] Unable to parse shared mutation data');
+        console.error('[vuex-shared-mutations] Unable to parse shared mutation data');
         console.error(event.newValue, error);
       } finally {
         committing = false;
