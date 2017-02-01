@@ -9,13 +9,21 @@ exports.default = function (_ref) {
   var predicate = _ref.predicate,
       sharingKey = _ref.sharingKey;
   return function (store) {
-    if (!window || !window.localStorage) {
-      console.error('[vuex-action-sharer] localStorage is not available. Disabling plugin');
+    if (typeof window === 'undefined' || !window.localStorage) {
+      console.error('[vuex-shared-mutations] localStorage is not available. Disabling plugin');
       return;
     }
 
     if (typeof predicate !== 'function' && !Array.isArray(predicate)) {
-      console.error('[vuex-action-sharer] Predicate should be either array of mutation names or function. Disabling plugin');
+      console.error('[vuex-shared-mutations] Predicate should be either array of mutation names or function. Disabling plugin');
+      return;
+    }
+
+    try {
+      window.localStorage.setItem('vuex-mutations-sharer__test', 'test');
+      window.localStorage.removeItem('vuex-mutations-sharer__test');
+    } catch (e) {
+      console.error('[vuex-shared-mutations] Unable to use setItem on localStorage. Disabling plugin');
       return;
     }
 
@@ -23,7 +31,7 @@ exports.default = function (_ref) {
     var key = sharingKey || DEFAULT_SHARING_KEY;
 
     var shouldShare = typeof predicate === 'function' ? predicate : function (mutation) {
-      return predicate.includes(mutation.type);
+      return predicate.indexOf(mutation.type) !== -1;
     };
 
     store.subscribe(function (mutation) {
@@ -32,7 +40,7 @@ exports.default = function (_ref) {
         try {
           window.localStorage.setItem(key, JSON.stringify(mutation));
         } catch (e) {
-          console.error('[vuex-action-sharer] Unable to use setItem on localStorage');
+          console.error('[vuex-shared-mutations] Unable to use setItem on localStorage');
           console.error(e);
         }
       }
@@ -45,7 +53,7 @@ exports.default = function (_ref) {
           committing = true;
           store.commit(mutation.type, mutation.payload);
         } catch (error) {
-          console.error('[vuex-action-sharer] Unable to parse shared mutation data');
+          console.error('[vuex-shared-mutations] Unable to parse shared mutation data');
           console.error(event.newValue, error);
         } finally {
           committing = false;

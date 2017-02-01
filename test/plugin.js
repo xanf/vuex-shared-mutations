@@ -7,7 +7,6 @@ import createSharingPlugin from '../dist/vuex-shared-mutations';
 
 Vue.use(Vuex);
 
-browserEnv([ 'window' ]);
 const noop = () => true;
 
 function dispatchFakeStorageEvent(key, data) {
@@ -18,7 +17,8 @@ function dispatchFakeStorageEvent(key, data) {
 }
 
 test.beforeEach(t => {
-  window.localStorage = { setItem: noop, getItem: noop };
+  browserEnv([ 'window' ]);
+  window.localStorage = { setItem: noop, getItem: noop, removeItem: noop };
   [ console.error, window.localStorage.setItem, window.localStorage.getItem ].forEach(m => {
     if (m.restore) m.restore();
   });
@@ -28,18 +28,34 @@ test.beforeEach(t => {
   });
 });
 
+test('should report an error if window not present (SSR environment)', t => {
+  delete global.window;
+  const errorSpy = sinon.spy(console, 'error');
+  const plugin = createSharingPlugin({});
+  plugin(t.context.fakeStore);
+  t.true(errorSpy.calledOnce);
+});
+
 test('should report an error if localStorage is not available', t => {
   window.localStorage = null;
   const errorSpy = sinon.spy(console, 'error');
-  const plugin = createSharingPlugin({});
-  plugin({});
+  const plugin = createSharingPlugin({ predicate: noop });
+  plugin(t.context.fakeStore);
+  t.true(errorSpy.calledOnce);
+});
+
+test('should fail early if localStorage.setItem is not available', t => {
+  sinon.stub(window.localStorage, 'setItem').throws();
+  const errorSpy = sinon.spy(console, 'error');
+  const plugin = createSharingPlugin({ predicate: noop });
+  plugin(t.context.fakeStore);
   t.true(errorSpy.calledOnce);
 });
 
 test('should report an error if predicate is missing', t => {
   const errorSpy = sinon.spy(console, 'error');
   const plugin = createSharingPlugin({});
-  plugin({});
+  plugin(t.context.fakeStore);
   t.true(errorSpy.calledOnce);
 });
 
@@ -85,9 +101,10 @@ test('should share mutation if it is specified in our list', t => {
 
 test('logs error if setItem is not working (for example quota limit)', t => {
   const errorSpy = sinon.spy(console, 'error');
-  sinon.stub(window.localStorage, 'setItem').throws();
+  const setItemStub = sinon.stub(window.localStorage, 'setItem');
   const plugin = createSharingPlugin({ predicate: noop });
   plugin(t.context.fakeStore);
+  setItemStub.throws();
   t.context.fakeStore.commit('action1');
   t.true(errorSpy.calledTwice);
 });
@@ -122,11 +139,24 @@ test('does not invokes setItem when replaying storage event', t => {
 
   const plugin = createSharingPlugin({ sharingKey, predicate: noop });
   plugin(t.context.fakeStore);
-
+  setItemSpy.reset();
   const fakeStorageData = { type: 'action2', payload: { some: 'extra data' } };
   dispatchFakeStorageEvent(sharingKey, fakeStorageData);
 
   t.false(setItemSpy.called);
+});
+
+test('does not invokes store.dispatch on other localStorage keys', t => {
+  const sharingKey = 'some-subscribe-key';
+  const setDispatchSpy = sinon.spy(t.context.fakeStore, 'dispatch');
+
+  const plugin = createSharingPlugin({ sharingKey, predicate: noop });
+  plugin(t.context.fakeStore);
+
+  const fakeStorageData = { type: 'action2', payload: { some: 'extra data' } };
+  dispatchFakeStorageEvent('some-other-key', fakeStorageData);
+
+  t.false(setDispatchSpy.called);
 });
 
 test('logs error if have corrupted data in localStorage', t => {

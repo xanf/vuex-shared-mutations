@@ -1,7 +1,7 @@
 const DEFAULT_SHARING_KEY = 'vuex-mutations-sharer';
 
 export default ({ predicate, sharingKey }) => store => {
-  if (!window || !window.localStorage) {
+  if (typeof window === 'undefined' || !window.localStorage) {
     console.error('[vuex-shared-mutations] localStorage is not available. Disabling plugin');
     return;
   }
@@ -9,6 +9,16 @@ export default ({ predicate, sharingKey }) => store => {
   if (typeof predicate !== 'function' && !Array.isArray(predicate)) {
     console.error(
       '[vuex-shared-mutations] Predicate should be either array of mutation names or function. Disabling plugin',
+    );
+    return;
+  }
+
+  try {
+    window.localStorage.setItem('vuex-mutations-sharer__test', 'test');
+    window.localStorage.removeItem('vuex-mutations-sharer__test');
+  } catch (e) {
+    console.error(
+      '[vuex-shared-mutations] Unable to use setItem on localStorage. Disabling plugin',
     );
     return;
   }
