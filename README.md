@@ -18,7 +18,7 @@ import createMutationsSharer from 'vuex-shared-mutations'
 
 const store = new Vuex.Store({
   // ...
-  plugins: [createMutationsSharer({ predicate: ['action1', 'action2'] })]
+  plugins: [createMutationsSharer({ predicate: ['mutation1', 'mutation2'] })]
 })
 ```
 
