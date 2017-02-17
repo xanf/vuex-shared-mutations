@@ -32,6 +32,23 @@ can be provided to configure the plugin for your specific needs:
 - `sharingKey <String>`: The key used to share actions via localStorage. (default: __vuex-mutations-sharer__)
 - `predicate <Array | Function>`: Either an array of mutation types to be shared or predicate function, which accepts whole mutation object and returns `true` if this mutation should be shared.
 
+## How it works
+
+When `$store.commit` is called, the plugin is invoked and saves the mutation object to localStorage. This triggers an `storage` event in all other tabs/windows (in the same browser, with the same site domain loaded), which then replays the mutation in that tab/window (during which the sync is turned off to disable recursion).
+
+## Contributing
+
+- Fork
+- `> git clone`
+- `> yarn` (like npm install)
+- `> yarn global add ava` (test runner)
+- Make your changes to `src/index.js`
+- `> npm run test`
+- `> npm run lint`
+- If everything is passing:
+	- Update CHANGELOG.md
+	- Commit and Make a pull request
+
 ## License
 
 MIT © [Illya Klymov](https://github.com/xanf)

@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Repeating the same mutation would previously only have shared the first commit
 
+### Added
+- Readme section "Contributing"
+- Readme section "How it works"
+
 ## [0.0.2] - 2017-02-01
 ### Added
 - Print error and fail early if localStorage.setItem throws an error
