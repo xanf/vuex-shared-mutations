@@ -35,6 +35,7 @@ export default ({ predicate, sharingKey }) => store => {
     if (shouldShare(mutation)) {
       try {
         window.localStorage.setItem(key, JSON.stringify(mutation));
+        window.localStorage.removeItem(key);
       } catch (e) {
         console.error('[vuex-shared-mutations] Unable to use setItem on localStorage');
         console.error(e);
@@ -43,17 +44,18 @@ export default ({ predicate, sharingKey }) => store => {
   });
 
   window.addEventListener('storage', event => {
-    if (event.key === key) {
-      try {
-        const mutation = JSON.parse(event.newValue);
-        committing = true;
-        store.commit(mutation.type, mutation.payload);
-      } catch (error) {
-        console.error('[vuex-shared-mutations] Unable to parse shared mutation data');
-        console.error(event.newValue, error);
-      } finally {
-        committing = false;
-      }
+    if (event.newValue === null) return;
+    if (event.key !== key) return;
+
+    try {
+      const mutation = JSON.parse(event.newValue);
+      committing = true;
+      store.commit(mutation.type, mutation.payload);
+    } catch (error) {
+      console.error('[vuex-shared-mutations] Unable to parse shared mutation data');
+      console.error(event.newValue, error);
+    } finally {
+      committing = false;
     }
   });
 };
