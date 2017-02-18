@@ -22,6 +22,28 @@ const store = new Vuex.Store({
 })
 ```
 
+Same as:
+
+```js
+import createMutationsSharer from 'vuex-shared-mutations'
+
+const store = new Vuex.Store({
+  // ...
+  plugins: [createMutationsSharer({ predicate: (mutation, state) => {
+    const predicate = ['mutation1', 'mutation2']
+
+    // Conditionally trigger other plugins subscription event here to
+    // have them called only once (in the tab where the commit happened)
+    // ie. save certain values to localStorage
+    // pluginStateChanged(mutation, state)
+
+    return predicate.indexOf(mutation.type) >= 0;
+  } })]
+})
+```
+
+
+
 ## API
 
 ### `createMutationsSharer([options])`
@@ -30,7 +52,7 @@ Creates a new instance of the plugin with the given options. The following optio
 can be provided to configure the plugin for your specific needs:
 
 - `sharingKey <String>`: The key used to share actions via localStorage. (default: __vuex-mutations-sharer__)
-- `predicate <Array | Function>`: Either an array of mutation types to be shared or predicate function, which accepts whole mutation object and returns `true` if this mutation should be shared.
+- `predicate <Array | Function>`: Either an array of mutation types to be shared or predicate function, which accepts whole mutation object (and state) and returns `true` if this mutation should be shared.
 
 ## How it works
 

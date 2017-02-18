@@ -34,9 +34,9 @@ exports.default = function (_ref) {
       return predicate.indexOf(mutation.type) !== -1;
     };
 
-    store.subscribe(function (mutation) {
+    store.subscribe(function (mutation, state) {
       if (committing) return;
-      if (shouldShare(mutation)) {
+      if (shouldShare(mutation, state)) {
         try {
           window.localStorage.setItem(key, JSON.stringify(mutation));
           window.localStorage.removeItem(key);

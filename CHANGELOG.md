@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Readme section "Contributing"
 - Readme section "How it works"
+- Readme predicate function usage example
+- Passing `state` to predicate function allows for invoking other plugins in the predicate
 
 ## [0.0.2] - 2017-02-01
 ### Added

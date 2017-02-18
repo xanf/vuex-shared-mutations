@@ -30,9 +30,9 @@ export default ({ predicate, sharingKey }) => store => {
     ? predicate
     : mutation => predicate.indexOf(mutation.type) !== -1;
 
-  store.subscribe(mutation => {
+  store.subscribe((mutation, state) => {
     if (committing) return;
-    if (shouldShare(mutation)) {
+    if (shouldShare(mutation, state)) {
       try {
         window.localStorage.setItem(key, JSON.stringify(mutation));
         window.localStorage.removeItem(key);
