@@ -34,11 +34,12 @@ exports.default = function (_ref) {
       return predicate.indexOf(mutation.type) !== -1;
     };
 
-    store.subscribe(function (mutation) {
+    store.subscribe(function (mutation, state) {
       if (committing) return;
-      if (shouldShare(mutation)) {
+      if (shouldShare(mutation, state)) {
         try {
           window.localStorage.setItem(key, JSON.stringify(mutation));
+          window.localStorage.removeItem(key);
         } catch (e) {
           console.error('[vuex-shared-mutations] Unable to use setItem on localStorage');
           console.error(e);
@@ -47,17 +48,18 @@ exports.default = function (_ref) {
     });
 
     window.addEventListener('storage', function (event) {
-      if (event.key === key) {
-        try {
-          var mutation = JSON.parse(event.newValue);
-          committing = true;
-          store.commit(mutation.type, mutation.payload);
-        } catch (error) {
-          console.error('[vuex-shared-mutations] Unable to parse shared mutation data');
-          console.error(event.newValue, error);
-        } finally {
-          committing = false;
-        }
+      if (event.newValue === null) return;
+      if (event.key !== key) return;
+
+      try {
+        var mutation = JSON.parse(event.newValue);
+        committing = true;
+        store.commit(mutation.type, mutation.payload);
+      } catch (error) {
+        console.error('[vuex-shared-mutations] Unable to parse shared mutation data');
+        console.error(event.newValue, error);
+      } finally {
+        committing = false;
       }
     });
   };

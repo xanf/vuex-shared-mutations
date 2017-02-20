@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Fixed
+- Repeating the same mutation would previously only have shared the first commit
+
+### Added
+- Readme section "Contributing"
+- Readme section "How it works"
+- Readme predicate function usage example
+- Passing `state` to predicate function allows for invoking other plugins in the predicate
+
 ## [0.0.2] - 2017-02-01
 ### Added
 - Print error and fail early if localStorage.setItem throws an error
