@@ -1,6 +1,6 @@
 {
   "name": "vuex-shared-mutations",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Share vuex mutations across tabs via localStorage",
   "main": "dist/vuex-shared-mutations.js",
   "scripts": {
