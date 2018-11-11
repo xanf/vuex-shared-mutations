@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.5 - 2018-11-11]
+
+Thanks to [@jameswragg](https://github.com/jameswragg) and [@justin-schroeder](https://github.com/justin-schroeder) for this version
+
+### Fixed
+
+- IE11 is not triggering storage events if payload is bigger than 16kb
+
 ## [0.0.4 - 2018-06-22]
 
 Credits to [@qkdreyer ](https://github.com/qkdreyer) for this version
