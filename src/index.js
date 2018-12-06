@@ -57,10 +57,10 @@ export default ({ predicate, sharingKey, storageKey }) => store => {
 
   window.addEventListener('storage', event => {
     if (!event.newValue) return;
-    if (event.key !== key) return;
+    if (event.key !== storageKeyEntry) return;
 
     try {
-      const mutation = JSON.parse(window.localStorage.getItem(storageKeyEntry));
+      const mutation = JSON.parse(event.newValue);
       committing = true;
       store.commit(mutation.type, mutation.payload);
     } catch (error) {
