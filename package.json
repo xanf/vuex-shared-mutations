@@ -1,11 +1,11 @@
 {
   "name": "vuex-shared-mutations",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Share vuex mutations across tabs via localStorage",
   "main": "dist/vuex-shared-mutations.js",
   "scripts": {
-    "test": "npm run build && ava",
-    "coverage": "npm run build && nyc ava && nyc report --reporter html",
+    "test": "yarn run build && ava",
+    "coverage": "yarn run build && nyc ava && nyc report --reporter html",
     "lint": "eslint src test",
     "build": "babel src/index.js -o dist/vuex-shared-mutations.js"
   },

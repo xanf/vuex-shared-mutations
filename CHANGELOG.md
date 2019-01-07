@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.6 - 2019-01-07]
+
+### Fixed
+
+- Issue introduced in 0.0.5 when plugin failed to work in Chrome due to concurrency issues (#13)
+
 ## [0.0.5 - 2018-11-11]
 
 Thanks to [@jameswragg](https://github.com/jameswragg) and [@justin-schroeder](https://github.com/justin-schroeder) for this version

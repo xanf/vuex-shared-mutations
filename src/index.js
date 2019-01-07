@@ -1,7 +1,12 @@
 const DEFAULT_SHARING_KEY = 'vuex-mutations-sharer';
 const DEFAULT_STORAGE_KEY = 'vuex-mutation-sharer-storage';
 
-export default ({ predicate, sharingKey, storageKey }) => store => {
+export default ({
+  predicate,
+  sharingKey = DEFAULT_SHARING_KEY,
+  storageKey = DEFAULT_STORAGE_KEY,
+  timeout = 0,
+}) => store => {
   if (typeof window === 'undefined' || !window.localStorage) {
     console.error(
       '[vuex-shared-mutations] localStorage is not available. Disabling plugin',
@@ -27,8 +32,6 @@ export default ({ predicate, sharingKey, storageKey }) => store => {
   }
 
   let committing = false;
-  const key = sharingKey || DEFAULT_SHARING_KEY;
-  const storageKeyEntry = storageKey || DEFAULT_STORAGE_KEY;
 
   const shouldShare =
     typeof predicate === 'function'
@@ -42,10 +45,14 @@ export default ({ predicate, sharingKey, storageKey }) => store => {
         // IE11 does not produce storage event in case of big payload
         // We are hacking around this by using two entries - one to actually
         // store relevant data - and one for notifications
-        window.localStorage.setItem(storageKeyEntry, JSON.stringify(mutation));
-        window.localStorage.setItem(key, 'notification');
-        window.localStorage.removeItem(key);
-        window.localStorage.removeItem(storageKeyEntry);
+        window.localStorage.setItem(storageKey, JSON.stringify(mutation));
+        window.localStorage.setItem(sharingKey, 'notification');
+        if (timeout) {
+          setTimeout(() => {
+            window.localStorage.removeItem(sharingKey);
+            window.localStorage.removeItem(storageKey);
+          }, timeout);
+        }
       } catch (e) {
         console.error(
           '[vuex-shared-mutations] Unable to use setItem on localStorage',
@@ -57,10 +64,10 @@ export default ({ predicate, sharingKey, storageKey }) => store => {
 
   window.addEventListener('storage', event => {
     if (!event.newValue) return;
-    if (event.key !== key) return;
+    if (event.key !== sharingKey) return;
 
     try {
-      const mutation = JSON.parse(window.localStorage.getItem(storageKeyEntry));
+      const mutation = JSON.parse(window.localStorage.getItem(storageKey));
       committing = true;
       store.commit(mutation.type, mutation.payload);
     } catch (error) {
