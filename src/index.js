@@ -46,7 +46,7 @@ export default ({
         // We are hacking around this by using two entries - one to actually
         // store relevant data - and one for notifications
         window.localStorage.setItem(storageKey, JSON.stringify(mutation));
-        window.localStorage.setItem(sharingKey, 'notification');
+        window.localStorage.setItem(sharingKey, `notification-${Date.now()}`);
         if (timeout) {
           setTimeout(() => {
             window.localStorage.removeItem(sharingKey);
