@@ -1,9 +1,10 @@
 # vuex-shared-mutations
 
 Share certain [Vuex](http://vuex.vuejs.org/) mutations across multiple tabs/windows using [localStorage](https://developer.mozilla.org/nl/docs/Web/API/Window/localStorage).
-
 [![NPM version](https://img.shields.io/npm/v/vuex-shared-mutations.svg?style=flat-square)](https://www.npmjs.com/package/vuex-shared-mutations)
 [![Build Status](https://img.shields.io/travis/xanf/vuex-shared-mutations.svg?style=flat-square)](https://travis-ci.org/xanf/vuex-shared-mutations)
+
+[Demo](https://codesandbox.io/s/n7ynon3lol)
 
 ## Installation
 
