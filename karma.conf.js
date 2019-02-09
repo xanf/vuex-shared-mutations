@@ -117,7 +117,9 @@ module.exports = function karmaConfig(config) {
 
     browserStack,
     customLaunchers,
-    browsers: browserStack.username ? Object.keys(customLaunchers) : [],
+    browsers: browserStack.username
+      ? Object.keys(customLaunchers)
+      : ["HeadlessChrome"],
     customHeaders: [
       {
         match: ".*\\.html",
