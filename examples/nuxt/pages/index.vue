@@ -7,7 +7,7 @@
     <hr>
     <p>
       Open this example in
-      <a href="https://n7ynon3lol.codesandbox.io/" target="_blank">multiple</a>
+      <a href="/" target="_blank">multiple</a>
       tabs and play with
       <b>+</b>,
       <b>-</b>, and
@@ -15,16 +15,16 @@
     </p>
     <p>
       <b>+</b> and
-      <b>-</b> actions are shared using
+      <b>-</b> mutations are shared using
       <a
         href="https://www.npmjs.com/package/vuex-shared-mutations"
         target="_blank"
       >vuex-shared-mutations</a>, so the value will be in sync while you're using these buttons
     </p>
     <p>
-      <b>+2</b> action, however, is not shared, so you can put your tabs
+      <b>+2</b> mutation, however, is not shared, so you can put your tabs
       out-of-sync. This is intentional, we're sharing
-      <b>actions</b>, not entire
+      <b>mutations</b>, not entire
       system state
     </p>
     <hr>
