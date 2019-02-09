@@ -8,7 +8,7 @@
     <p>
       Open this example in
       <a
-        href="https://codesandbox.io/s/github/xanf/vuex-shared-mutations/tree/master/examples/simple"
+        href="/"
         target="_blank"
       >multiple</a>
       tabs and play with
@@ -18,21 +18,21 @@
     </p>
     <p>
       <b>+</b> and
-      <b>-</b> actions are shared using
+      <b>-</b> mutations are shared using
       <a
         href="https://www.npmjs.com/package/vuex-shared-mutations"
         target="_blank"
       >vuex-shared-mutations</a>, so the value will be in sync while you're using these buttons
     </p>
     <p>
-      <b>+2</b> action, however, is not shared, so you can put your tabs
+      <b>+2</b> mutation, however, is not shared, so you can put your tabs
       out-of-sync. This is intentional, we're sharing
-      <b>actions</b>, not entire
+      <b>mutations</b>, not entire
       system state
     </p>
     <hr>
     <p>
-      <a href="https://github.com/xanf/vuex-shared-mutations/tree/master/test">Demo source</a>
+      <a href="https://github.com/xanf/vuex-shared-mutations/tree/master/examples/simple">Demo source</a>
     </p>
   </div>
 </template>
