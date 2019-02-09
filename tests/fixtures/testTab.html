@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>Test tab</title>
+    <script src="/base/node_modules/@babel/polyfill/dist/polyfill.js"></script>
+    <script src="/base/node_modules/vue/dist/vue.min.js"></script>
+    <script src="/base/node_modules/vuex/dist/vuex.min.js"></script>
+    <script src="/base/tests/fixtures/publishOnWindow.js"></script>
+    <script>
+      window.addEventListener("load", function() {
+        window.loaded = true;
+      });
+
+      window.createStore = function(strategy) {
+        Vue.config.devtools = false;
+        Vue.config.productionTip = false;
+        Vue.use(Vuex);
+
+        var pluginConfig = {
+          predicate: ["increment", "setMessage"],
+        };
+
+        if (strategy === "localStorage") {
+          pluginConfig.strategy = new window.LocalStorageStrategy();
+        }
+
+        if (strategy === "BroadcastChannel") {
+          pluginConfig.strategy = new window.BroadcastChannelStrategy();
+        }
+
+        var plug = window.vuexSharedMutations(pluginConfig);
+        var store = new Vuex.Store({
+          plugins: [plug],
+          state: {
+            count: 0,
+            message: "",
+          },
+          mutations: {
+            setMessage: function(state, payload) {
+              state.message = payload.message;
+            },
+            increment: function(state) {
+              state.count++;
+            },
+            decrement: function(state) {
+              state.count--;
+            },
+          },
+        });
+        window.store = store;
+        return store;
+      };
+    </script>
+  </head>
+  <body></body>
+</html>
