@@ -2,6 +2,8 @@
 
 Share certain [Vuex](http://vuex.vuejs.org/) mutations across multiple tabs/windows. [![NPM version](https://img.shields.io/npm/v/vuex-shared-mutations.svg?style=flat-square)](https://www.npmjs.com/package/vuex-shared-mutations) [![Build Status](https://img.shields.io/travis/xanf/vuex-shared-mutations.svg?style=flat-square)](https://travis-ci.org/xanf/vuex-shared-mutations) [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=eDZyK0F0MlE1RzJuRHJHYVZLYWJIZ0JWdnNxdDM0M256dm1DMVBSVUd5bz0tLUhYN3FteXkvaDROSmtSbmZZREFiYnc9PQ==--9fd2deea21df436f47ded98bcd65032e88012900)](https://www.browserstack.com/automate/public-build/eDZyK0F0MlE1RzJuRHJHYVZLYWJIZ0JWdnNxdDM0M256dm1DMVBSVUd5bz0tLUhYN3FteXkvaDROSmtSbmZZREFiYnc9PQ==--9fd2deea21df436f47ded98bcd65032e88012900)
 
+(you can see failing BrowserStack/build badge while we're waiting for approval as opensource project from BrowserStack, don't worry)
+
 - [Basic example](https://qk441m1kmq.codesandbox.io/)
 - [Nuxt example](https://98qn583znp.sse.codesandbox.io/)
 
