@@ -2,7 +2,7 @@
 
 Share certain [Vuex](http://vuex.vuejs.org/) mutations across multiple tabs/windows. [![NPM version](https://img.shields.io/npm/v/vuex-shared-mutations.svg?style=flat-square)](https://www.npmjs.com/package/vuex-shared-mutations) [![Build Status](https://img.shields.io/travis/xanf/vuex-shared-mutations.svg?style=flat-square)](https://travis-ci.org/xanf/vuex-shared-mutations)
 
-[Basic example](https://codesandbox.io/s/github/xanf/vuex-shared-mutations/tree/master/examples/simple)
+[Basic example](https://qk441m1kmq.codesandbox.io/)
 
 ## Installation
 
