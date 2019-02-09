@@ -29,7 +29,7 @@
     </p>
     <hr>
     <p>
-      <a href="https://codesandbox.io/s/n7ynon3lol">Demo source</a>
+      <a href="https://github.com/xanf/vuex-shared-mutations/tree/master/examples/nuxt">Demo source</a>
     </p>
   </div>
 </template>
