@@ -77,6 +77,11 @@ module.exports = function karmaConfig(config) {
     accessKey: process.env.BROWSERSTACK_ACCESSKEY
   };
 
+  const reporters = ["progress", "coverage"];
+  if (browserStack.username) {
+    reporters.push("BrowserStack");
+  }
+
   config.set({
     basePath: "",
     concurrency: 1,
@@ -129,7 +134,7 @@ module.exports = function karmaConfig(config) {
     ],
     singleRun: false,
     webpack: webpackConfig,
-    reporters: ["progress", "coverage"],
+    reporters,
     captureTimeout: 60 * 5 * 1000,
     browserNoActivityTimeout: 60 * 5 * 1000
   });
