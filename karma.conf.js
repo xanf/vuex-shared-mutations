@@ -73,8 +73,8 @@ fixMocha.$inject = ["config.files"];
 
 module.exports = function karmaConfig(config) {
   const browserStack = {
-    username: process.env.BROWSERSTACK_USERNAME || "illyaklymov1",
-    accessKey: process.env.BROWSERSTACK_ACCESSKEY || "1ykKbjhyU7GMUmqqAphg"
+    username: process.env.BROWSERSTACK_USERNAME,
+    accessKey: process.env.BROWSERSTACK_ACCESSKEY
   };
 
   config.set({
