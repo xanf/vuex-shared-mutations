@@ -3,7 +3,7 @@ import createDefaultStrategy from "./strategies/defaultStrategy";
 export {
   default as BroadcastChannelStrategy
 } from "./strategies/broadcastChannel";
-export { default as LocalStorageStratery } from "./strategies/localStorage";
+export { default as LocalStorageStrategy } from "./strategies/localStorage";
 
 export default ({ predicate, strategy, ...rest } = {}) => {
   /* istanbul ignore next: deprecation warning */
