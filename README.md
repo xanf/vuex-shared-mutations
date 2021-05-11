@@ -64,14 +64,14 @@ If you do not supply strategy system will use [BroadcastChannel](https://develop
 If you need to configure strategies you can do that by hand, for example:
 
 ```
-import createMutationsSharer, { BroadcastStrategy } from 'vuex-shared-mutations';
+import createMutationsSharer, { BroadcastChannelStrategy } from 'vuex-shared-mutations';
 
 const store = new Vuex.Store({
   // ...
   plugins: [
     createMutationsSharer({
       predicate: ['m-1'],
-      strategy: new BroadcastStrategy({ key: 'CHANNEL_NAME' })
+      strategy: new BroadcastChannelStrategy({ key: 'CHANNEL_NAME' })
     }),
   ],
 });
