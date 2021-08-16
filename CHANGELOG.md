@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.3 - 2021-07-16]
+
+Minor release, bugfix
+
+### Fixed
+
+- Align default strategy with documentation. `BroadcastChannel` where available, `LocalStorage` as fallback.
+
 ## [1.0.0 - 2019-02-03]
 
 Major release, entire plugin rewrite
